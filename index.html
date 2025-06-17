@@ -6,9 +6,7 @@
     <title>Login - Cuong Mech Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <!-- Firebase App (the core Firebase SDK) -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-    <!-- Firebase Authentication -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap');
@@ -123,7 +121,7 @@
 
                 alert("Đăng nhập thành công: " + user.email);
                 // Chuyển hướng đến trang chính hoặc trang admin
-                window.location.href = "index.html"; // Hoặc trang admin nếu cần
+                window.location.href = "admin.html"; // Hoặc trang chính nếu cần
             } catch (error) {
                 // Xử lý lỗi
                 alert("Lỗi đăng nhập: " + error.message);
