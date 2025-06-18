@@ -27,6 +27,10 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4" style="animation: gradientShift 15s ease infinite; background: linear-gradient(135deg, #1a237e, #0d47a1, #1565c0); background-size: 200% 200%;">
@@ -75,6 +79,11 @@
                             <i class="fas fa-eye"></i>
                         </button>
                     </div>
+                    <div class="text-right mt-1">
+                        <button type="button" id="forgotPassword" class="text-xs text-blue-600 hover:text-blue-800 transition-transform">
+                            Quên mật khẩu?
+                        </button>
+                    </div>
                 </div>
                 
                 <button type="submit" class="w-full bg-gray-900 hover:bg-gray-800 text-white py-2 px-4 rounded-lg font-medium transition flex items-center justify-center">
@@ -96,6 +105,20 @@
         </div>
     </div>
 
+    <!-- QR Code Modal -->
+    <div id="qrModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg p-6 max-w-sm w-full">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold">Quét mã Zalo để liên hệ hỗ trợ</h3>
+                <button id="closeQrModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <img src="https://i.postimg.cc/2jLDwRzT/My-zalo-QR.jpg" alt="Zalo QR Code" class="w-full rounded">
+            <p class="text-sm text-gray-600 mt-2 text-center">Quét mã QR để liên hệ hỗ trợ mật khẩu</p>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Toggle password visibility
@@ -108,6 +131,33 @@
                 togglePassword.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
             });
             
+            // Forgot password QR modal
+            const forgotPasswordBtn = document.getElementById('forgotPassword');
+            const qrModal = document.getElementById('qrModal');
+            const closeQrModal = document.getElementById('closeQrModal');
+
+            forgotPasswordBtn.addEventListener('click', function() {
+                // Add bounce animation
+                this.classList.add('animate-[bounce_0.5s_ease-in-out]');
+                qrModal.classList.remove('hidden');
+                
+                // Remove animation after it completes
+                setTimeout(() => {
+                    this.classList.remove('animate-[bounce_0.5s_ease-in-out]');
+                }, 500);
+            });
+
+            closeQrModal.addEventListener('click', function() {
+                qrModal.classList.add('hidden');
+            });
+
+            // Close modal when clicking outside
+            qrModal.addEventListener('click', function(e) {
+                if (e.target === qrModal) {
+                    qrModal.classList.add('hidden');
+                }
+            });
+
             // Form validation
             const loginForm = document.getElementById('loginForm');
             
